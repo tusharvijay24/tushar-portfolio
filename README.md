@@ -3,7 +3,7 @@
 Welcome to my personal portfolio website!  
 This project showcases my work, skills, and experiences as an **iOS Developer** — designed and built using **React.js** and **Tailwind CSS**, and deployed for free on **Vercel**.
 
-🌐 **Live Site:** [https://tushar-vijayvargiya.vercel.app](https://tushar-vijayvargiya.vercel.app)
+🌐 **Live Site:** [https://tusharvijayvargiya.vercel.app](https://tusharvijayvargiya.vercel.app)
 
 ---
 
