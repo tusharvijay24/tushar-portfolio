@@ -411,7 +411,7 @@ export default function Portfolio() {
 
       <footer className="py-8 px-6 border-t border-zinc-900">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-500">© 2025 Tushar Vijayvargiya.</p>
+          <p className="text-gray-500">© 2025 Tushar Vijayvargiya.ALL RIGHTS RESERVED</p>
         </div>
       </footer>
     </div>
