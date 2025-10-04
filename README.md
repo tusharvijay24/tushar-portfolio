@@ -55,7 +55,4 @@ If you’d like to get in touch, feel free to reach out through any of the platf
 
 ⭐ **If you like this project, consider giving it a star on GitHub!**
 =======
-## 🧰 Installation & Setup
-
-If you want to run this project locally:
 
