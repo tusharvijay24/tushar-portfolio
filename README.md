@@ -38,7 +38,7 @@ To deploy your own version for free:
 4. Select your repo and click **Deploy**  
 5. Rename your project to your preferred subdomain (e.g. `tushar-vijayvargiya`)  
 6. Done ✅ Your site is live at  
-   `https://tushar-vijayvargiya.vercel.app`
+   `https://tusharvijayvargiya.vercel.app`
 
 ---
 
@@ -49,7 +49,7 @@ If you’d like to get in touch, feel free to reach out through any of the platf
 📧 **Email:** [tusharvijay24@gmail.com](mailto:tusharvijay24@gmail.com)  
 💼 **LinkedIn:** [linkedin.com/in/tushar-vijayvargiya](https://linkedin.com/in/tushar-vijayvargiya)  
 💻 **GitHub:** [github.com/tusharvijay24](https://github.com/tusharvijay24)  
-🌍 **Portfolio:** [tushar-vijayvargiya.vercel.app](https://tushar-vijayvargiya.vercel.app)
+🌍 **Portfolio:** [tushar-vijayvargiyavercel.app](https://tusharvijayvargiya.vercel.app)
 
 ---
 
