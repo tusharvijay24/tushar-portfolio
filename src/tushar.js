@@ -239,17 +239,20 @@ export default function Portfolio() {
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold text-pink-500">iOS Development Expert</h3>
               <p className="text-gray-300 leading-relaxed">
-                Experienced iOS Developer with 4+ years specializing in Swift, Objective-C, and UIKit. I've delivered 6+ production apps across e-commerce, healthcare, and enterprise domains, consistently focusing on clean architecture, performance optimization, and reliability.
+                Experienced iOS Developer with 4+ years specializing in Swift, Objective-C, and UIKit. I've delivered 12+ production apps across e-commerce, healthcare, and enterprise domains, consistently focusing on clean architecture, performance optimization, and reliability.
               </p>
               <p className="text-gray-300 leading-relaxed">
                 My expertise spans the full iOS development lifecycle—from initial architecture design through App Store deployment. I'm passionate about creating exceptional user experiences while maintaining code quality and app stability.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 p-6 rounded-xl border border-purple-500/20">
-                  <Award className="w-10 h-10 text-pink-500 mb-3" />
-                  <p className="text-sm text-gray-400">iOS Bootcamp</p>
-                  <p className="font-semibold text-lg">Certified</p>
-                </div>
+               <a href="https://www.udemy.com/certificate/UC-a8c3bbfc-e1ca-4f5c-a365-f548d5e5e278/" target="_blank" rel="noopener noreferrer" className="block">
+  <div className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 p-6 rounded-xl border border-purple-500/20 cursor-pointer hover:shadow-lg transition-shadow">
+    <Award className="w-10 h-10 text-pink-500 mb-3" />
+    <p className="text-sm text-gray-400">iOS Bootcamp</p>
+    <p className="font-semibold text-lg">Certified</p>
+  </div>
+</a>
+
                 <div className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 p-6 rounded-xl border border-purple-500/20">
                   <Briefcase className="w-10 h-10 text-pink-500 mb-3" />
                   <p className="text-sm text-gray-400">B.Tech - EC</p>
@@ -411,7 +414,7 @@ export default function Portfolio() {
 
       <footer className="py-8 px-6 border-t border-zinc-900">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-500">© 2025 Tushar Vijayvargiya.ALL RIGHTS RESERVED</p>
+          <p className="text-gray-500">© 2025 Tushar Vijayvargiya. ALL RIGHTS RESERVED</p>
         </div>
       </footer>
     </div>
