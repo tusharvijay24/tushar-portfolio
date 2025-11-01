@@ -27,7 +27,6 @@ This project showcases my work, skills, and experiences as an **iOS Developer** 
 
 ---
 
-<<<<<<< HEAD
 ## 🚀 Deployment on Vercel
 
 To deploy your own version for free:
