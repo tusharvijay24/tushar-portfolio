@@ -114,11 +114,11 @@ export default function Portfolio() {
       company: 'Mindcrew Technologies Pvt. Ltd.',
       period: 'Apr 2023 - Apr 2025',
       location: 'Indore, MP',
-      highlights: [
-        'Built enterprise apps for VECV (Volvo Eicher)',
-        'Delivered Eicher CRM and VECV Evolve HRMS applications',
-        'Migrated workflows to async/await patterns for better UX',
-        'Implemented Firebase Performance and Crashlytics monitoring'
+       highlights: [
+        'Developed iOS applications from scratch to App Store',
+        'Implemented MVVM architecture and clean code practices',
+        'Integrated third-party SDKs and RESTful APIs',
+        'Managed releases via TestFlight and Git workflows'
       ]
     },
     {
@@ -127,10 +127,10 @@ export default function Portfolio() {
       period: 'June 2021 - Dec 2022',
       location: 'Indore, MP',
       highlights: [
-        'Developed iOS applications from scratch to App Store',
-        'Implemented MVVM architecture and clean code practices',
-        'Integrated third-party SDKs and RESTful APIs',
-        'Managed releases via TestFlight and Git workflows'
+        'Built enterprise apps for VECV (Volvo Eicher)',
+        'Delivered Eicher CRM and VECV Evolve HRMS applications',
+        'Migrated workflows to async/await patterns for better UX',
+        'Implemented Firebase Performance and Crashlytics monitoring'
       ]
     }
   ];
