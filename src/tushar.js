@@ -191,17 +191,17 @@ export default function Portfolio() {
     <main className="min-h-screen overflow-hidden bg-[#08090b] text-white selection:bg-emerald-300 selection:text-slate-950">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.14),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.04)_0,transparent_35%)]" />
       <div className="pointer-events-none fixed inset-0 opacity-[0.035] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:48px_48px]" />
-      <nav className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'border-b border-white/10 bg-[#08090b]/88 shadow-2xl shadow-black/30 backdrop-blur-xl' : 'bg-transparent'}`}>
+      <nav className={`site-nav fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'site-nav-scrolled shadow-2xl shadow-black/30' : ''}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <button onClick={() => scrollToSection('about')} className="flex items-center gap-3" aria-label="Go to top">
             <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.06] text-sm font-bold text-emerald-300 shadow-lg shadow-emerald-950/20 transition group-hover:border-emerald-300/30">TV</span>
             <span className="hidden text-left sm:block">
-              <span className="block text-sm font-semibold leading-5">Tushar Vijayvargiya</span>
-              <span className="block text-xs text-slate-400">Senior iOS Developer</span>
+              <span className="block text-sm font-semibold leading-5 text-white">Tushar Vijayvargiya</span>
+              <span className="block text-xs text-slate-300">Senior iOS Developer</span>
             </span>
           </button>
 
-          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 md:flex">
+          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-slate-950/60 p-1 shadow-lg shadow-black/20 md:flex">
             {navItems.map((item) => (
               <button
                 key={item.id}

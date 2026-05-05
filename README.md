@@ -1,57 +1,67 @@
-# 💼 Tushar Vijayvargiya | iOS Developer Portfolio
+# Tushar Vijayvargiya Portfolio
 
-Welcome to my personal portfolio website!  
-This project showcases my work, skills, and experiences as an **iOS Developer** — designed and built using **React.js** and **Tailwind CSS**, and deployed for free on **Vercel**.
+Personal portfolio website for Tushar Vijayvargiya, a Senior iOS Developer building production-ready native apps with Swift, UIKit, SwiftUI, Firebase, Maps, payments, NFC, and App Store release workflows.
 
-🌐 **Live Site:** [https://tusharvijayvargiya.vercel.app](https://tusharvijayvargiya.vercel.app)
+Live site: https://tusharvijayvargiya.com
 
----
+## Overview
 
-## 🚀 Tech Stack
+This portfolio presents Tushar's iOS engineering experience, shipped app work, technical skills, resume, and contact details in a polished dark interface. It is built as a React app with Tailwind CSS and deployed on Vercel.
 
-- ⚛️ **React.js** – Frontend framework  
-- 💨 **Tailwind CSS** – Styling  
-- 🧩 **Lucide React Icons** – Icons used across the app  
-- ☁️ **Vercel** – Deployment platform  
-- 🛠️ **Node.js & npm** – Package management  
+## Highlights
 
----
+- Dark professional portfolio design
+- Responsive layout for desktop and mobile
+- About, experience, apps, skills, and contact sections
+- Downloadable CV
+- Production iOS app/project cards
+- Contact actions for email and phone
+- Deployed on Vercel with a custom domain
 
-## ✨ Features
+## Tech Stack
 
-- Responsive design for all devices  
-- Smooth scroll and animated transitions  
-- Sections for About, Skills, Experience, Projects, and Contact  
-- Downloadable resume  
-- Integrated social media links (GitHub, LinkedIn, Email)
+- React
+- Tailwind CSS
+- Lucide React icons
+- JavaScript
+- Vercel
 
----
+## Project Structure
 
-## 🚀 Deployment on Vercel
+```text
+.
+├── public/
+│   ├── CV_Tushar_Vijayvargiya.pdf
+│   ├── tushar.jpg
+│   └── swift-bird.png
+├── src/
+│   ├── tushar.js
+│   ├── index.js
+│   └── index.css
+├── package.json
+├── tailwind.config.js
+└── README.md
+```
 
-To deploy your own version for free:
+## Local Development
 
-1. Push your project to GitHub  
-2. Go to [Vercel](https://vercel.com)  
-3. Click **"New Project" → "Import from GitHub"**  
-4. Select your repo and click **Deploy**  
-5. Rename your project to your preferred subdomain (e.g. `tushar-vijayvargiya`)  
-6. Done ✅ Your site is live at  
-   `https://tusharvijayvargiya.vercel.app`
+```bash
+npm install
+npm start
+```
 
----
+The app runs locally at `http://localhost:3000`.
 
-## 📬 Contact
+## Deployment
 
-If you’d like to get in touch, feel free to reach out through any of the platforms below:
+```bash
+npm run build
+vercel --prod
+```
 
-📧 **Email:** [tusharvijay24@gmail.com](mailto:tusharvijay24@gmail.com)  
-💼 **LinkedIn:** [linkedin.com/in/tushar-vijayvargiya](https://linkedin.com/in/tushar-vijayvargiya)  
-💻 **GitHub:** [github.com/tusharvijay24](https://github.com/tusharvijay24)  
-🌍 **Portfolio:** [tushar-vijayvargiyavercel.app](https://tusharvijayvargiya.vercel.app)
+## Contact
 
----
-
-⭐ **If you like this project, consider giving it a star on GitHub!**
-=======
-
+- Email: tusharvijay24@gmail.com
+- GitHub: https://github.com/tusharvijay24
+- LinkedIn: https://linkedin.com/in/tushar-vijayvargiya
+- Portfolio: https://tusharvijayvargiya.com
