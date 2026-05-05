@@ -3,19 +3,19 @@
   "name": "Tushar Vijayvargiya Portfolio",
   "icons": [
     {
-      "src": "tushar-favicon.png",
-      "sizes": "512x512",
+      "src": "tushar-profile-icon.png",
+      "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "tushar-favicon.png",
+      "src": "tushar-profile-icon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "128x128"
     },
     {
-      "src": "tushar-favicon.png",
+      "src": "tushar-profile-icon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "128x128"
     }
   ],
   "start_url": ".",
