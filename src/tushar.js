@@ -1,422 +1,613 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Phone, MapPin, ChevronDown, ExternalLink, Award, Briefcase, Download, Apple, Instagram, Facebook } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Apple,
+  ArrowUpRight,
+  Award,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Code2,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from 'lucide-react';
+
+const navItems = [
+  { label: 'About', id: 'about' },
+  { label: 'Experience', id: 'experience' },
+  { label: 'Apps', id: 'apps' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
+];
+
+const metrics = [
+  { value: '10+', label: 'Production apps shipped' },
+  { value: '5+', label: 'Years building iOS apps' },
+  { value: '8+', label: 'App Store products' },
+  { value: '~30%', label: 'Crash reduction delivered' },
+];
+
+const appProjects = [
+  {
+    name: 'Cravingly',
+    category: 'Food Ordering',
+    summary:
+      'Community food ordering platform with nearby home-cook discovery, MapKit flows, Firebase-backed engagement, checkout, and order tracking.',
+    stack: ['Objective-C', 'UIKit', 'MVVM', 'StoreKit', 'Deep Links'],
+    outcome: 'Led iOS development across discovery, search, privacy-ready release flows, push notifications, and App Store compliance.',
+    link: 'https://apps.apple.com/us/app/cravingly/id6633424731',
+    accent: 'from-rose-500 to-orange-400',
+  },
+  {
+    name: 'SIPN Bourbon',
+    category: 'Social Commerce',
+    summary:
+      'Social liquor commerce experience with interactive feeds, shoppable collections, brand discovery, and community-led purchase journeys.',
+    stack: ['Swift', 'UIKit', 'MVVM', 'Firebase', 'Alamofire'],
+    outcome: 'Built interactive feed, Virtual Bar, community modules, cocktail recipes, and shoppable content for in-app purchase journeys.',
+    link: 'https://apps.apple.com/in/app/sipn-bourbon/id1597312660',
+    accent: 'from-amber-500 to-red-500',
+  },
+  {
+    name: 'Ixkio',
+    category: 'NFC Platform',
+    summary:
+      'NFC tag management app combining CoreNFC, Vision, QR and barcode scanning with secure read, write, lock, and validation workflows.',
+    stack: ['Swift', 'CoreNFC', 'Vision', 'QR/Barcode', 'Security'],
+    outcome: 'Architected reliable NFC read, write, and lock flows for NTAG and ICODE tags with QR/barcode scanning support.',
+    link: 'https://apps.apple.com/us/app/ixkio/id6467871130',
+    accent: 'from-cyan-400 to-blue-500',
+  },
+  {
+    name: 'VECV Evolve',
+    category: 'Enterprise HRMS',
+    summary:
+      'Employee platform for Volvo Eicher covering leave management, cab booking, HR workflows, internal communication, and engagement modules.',
+    stack: ['Swift', 'UIKit', 'REST APIs', 'Enterprise', 'MVVM'],
+    outcome: 'Shipped enterprise workflows used by employees across core HR operations.',
+    link: 'https://apps.apple.com/in/app/vecvevolve-empower-yourself/id1208034545',
+    accent: 'from-emerald-400 to-teal-500',
+  },
+  {
+    name: 'Eicher CRM',
+    category: 'CRM Analytics',
+    summary:
+      'Enterprise CRM app for sales, services, spares, complaints, on-road support, and KPI visibility across operational teams.',
+    stack: ['Swift', 'UIKit', 'Analytics', 'REST APIs', 'Dashboards'],
+    outcome: 'Delivered KPI visibility across sales, service, spares, complaints, and on-road support for management and dealer teams.',
+    link: 'https://apps.apple.com/in/app/eicher-crm/id1467873868',
+    accent: 'from-violet-500 to-indigo-500',
+  },
+  {
+    name: 'BC Starter',
+    category: 'Retail Commerce',
+    summary:
+      'White-label retail commerce app with barcode scanning, varietal filters, multi-location ordering, secure payments, and rewards.',
+    stack: ['Swift', 'SwiftUI', 'MVVM', 'Stripe', 'WorldPay'],
+    outcome: 'Delivered white-label retail flows with barcode scan, filters, secure payments, pickup, delivery, driver tips, and directions.',
+    link: 'https://apps.apple.com/in/app/bc-starter/id1062799070',
+    accent: 'from-fuchsia-500 to-pink-500',
+  },
+];
+
+const experience = [
+  {
+    role: 'Senior iOS Developer',
+    company: 'Techmatic Systems India Pvt. Ltd.',
+    period: 'Apr 2025 - Jan 2026',
+    location: 'Hyderabad, Telangana',
+    points: [
+      'Leading iOS delivery for 3 large-scale SaaS and commerce products with Swift, UIKit, SwiftUI, Firebase, MapKit, barcode scanning, and payments.',
+      'Improving production reliability through crash analysis, Instruments profiling, release monitoring, and tighter QA feedback loops.',
+      'Adopting Tuist and mise for modular architecture, faster builds, and consistent development environments across the team.',
+    ],
+  },
+  {
+    role: 'iOS Developer',
+    company: 'Mindcrew Technologies Pvt. Ltd.',
+    period: 'Apr 2023 - Apr 2025',
+    location: 'Indore, MP',
+    points: [
+      'Delivered 6+ iOS applications from scratch to App Store across e-commerce, healthcare, utilities, and service-based domains.',
+      'Implemented MVVM architecture, API integration, push notifications, Firebase services, and third-party SDK workflows.',
+      'Used Fastlane, Git, and TestFlight for beta testing, release management, and reliable delivery workflows.',
+    ],
+  },
+  {
+    role: 'Associate Software Engineer (iOS)',
+    company: 'Softude Infotech Pvt. Ltd.',
+    period: 'Jun 2021 - Dec 2022',
+    location: 'Indore, MP',
+    points: [
+      'Delivered enterprise iOS modules for VECV, including CRM dashboards, HR workflows, employee services, and support operations.',
+      'Modularized networking with URLSession and Codable, moving blocking workflows to background tasks and async patterns.',
+      'Used Firebase Performance, Crashlytics, App Store Connect metrics, GitLab, Zoho, and TestFlight inside Agile delivery squads.',
+    ],
+  },
+];
+
+const skillGroups = [
+  {
+    title: 'iOS Engineering',
+    items: ['Swift', 'Objective-C', 'UIKit', 'SwiftUI', 'Combine', 'Auto Layout', 'Core Animation', 'CoreData', 'SwiftData'],
+  },
+  {
+    title: 'Apple Frameworks',
+    items: ['AVFoundation', 'CoreLocation', 'MapKit', 'CoreNFC', 'Vision', 'ARKit', 'StoreKit', 'HealthKit'],
+  },
+  {
+    title: 'Architecture',
+    items: ['MVVM', 'MVC', 'Clean Architecture', 'Modular Design', 'Reusable Components', 'Design Systems'],
+  },
+  {
+    title: 'Product Delivery',
+    items: ['REST APIs', 'Firebase', 'Push Notifications', 'Deep Links', 'Fastlane', 'TestFlight', 'Tuist', 'mise'],
+  },
+];
+
+const services = [
+  'Production iOS app development',
+  'App modernization and UIKit to SwiftUI migration',
+  'Firebase, maps, payments, NFC, and scanning integrations',
+  'Crash debugging, profiling, and release support',
+];
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('about');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      
-      const sections = ['home', 'about', 'skills', 'experience', 'projects'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
-        }
-        return false;
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const currentSection = navItems.find(({ id }) => {
+        const element = document.getElementById(id);
+        if (!element) return false;
+        const rect = element.getBoundingClientRect();
+        return rect.top <= 160 && rect.bottom >= 160;
       });
-      if (current) setActiveSection(current);
+      if (currentSection) setActiveSection(currentSection.id);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsMenuOpen(false);
   };
-
-  const skillCategories = {
-    'Languages & Frameworks': ['Swift', 'Objective-C', 'UIKit', 'SwiftUI', 'CoreData', 'SwiftData', 'Core Animation', 'CocoaTouch'],
-    'iOS Frameworks': ['AVFoundation', 'CoreLocation', 'MapKit', 'CoreNFC', 'Vision', 'ARKit', 'StoreKit', 'HealthKit'],
-    'Architecture & Patterns': ['MVVM', 'MVC', 'Clean Architecture', 'Modular Design', 'Auto Layout', 'Storyboards', 'XIBs'],
-    'Networking & APIs': ['REST APIs', 'JSON', 'Alamofire', 'URLSession', 'Codable', 'Firebase', 'Push Notifications'],
-    'Tools & CI/CD': ['Xcode', 'Git', 'TestFlight', 'Postman', 'CocoaPods', 'Swift Package Manager', 'Fastlane', 'Branch.io']
-  };
-
-  const projects = [
-    {
-      name: 'Cravingly',
-      desc: 'Community-based food ordering platform connecting diners with nearby home cooks featuring discovery, search, and location-based filtering',
-      tech: ['Swift', 'UIKit', 'MVVM', 'Firebase', 'MapKit'],
-      link: 'https://apps.apple.com/us/app/cravingly/id6633424731',
-      features: ['Location-based filtering', 'Social engagement', 'Secure checkout', 'Order tracking', 'Recipe discovery']
-    },
-    {
-      name: 'SIPN Bourbon',
-      desc: 'Social liquor e-commerce platform featuring interactive feeds, brand discovery, virtual bar curation, and shoppable collections',
-      tech: ['Swift', 'UIKit', 'Firebase', 'In-App Payments', 'Social Feed'],
-      link: 'https://apps.apple.com/in/app/sipn-bourbon/id1597312660',
-      features: ['Interactive feed', 'Brand discovery', 'Virtual bar', 'Community forums', 'Shoppable content']
-    },
-    {
-      name: 'BC Starter (BottleCapps)',
-      desc: 'White-label liquor retail app with barcode scanning, varietal filters, secure in-app payments, and multi-location support',
-      tech: ['Swift', 'CoreNFC', 'Apple Pay', 'MapKit', 'Barcode'],
-      link: 'https://apps.apple.com/in/app/bc-starter/id1062799070',
-      features: ['Barcode scanning', 'Multi-location', 'Apple Pay', 'Driver tips', 'Loyalty rewards']
-    },
-    {
-      name: 'MyUI App',
-      desc: 'Advanced UI component library and design system for iOS development with reusable components and custom design patterns',
-      tech: ['Swift', 'UIKit', 'SwiftUI', 'Design System', 'Components'],
-      link: 'https://apps.apple.com/us/app/myui-app/id6468562554',
-      features: ['Reusable components', 'Custom UI elements', 'Design patterns', 'Developer tools', 'Style guide']
-    },
-    {
-      name: 'VECV Evolve',
-      desc: 'Enterprise HRMS solution for Volvo Eicher with leave management, cab booking, employee engagement, and HR workflows',
-      tech: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'Enterprise'],
-      link: 'https://apps.apple.com/in/app/vecvevolve-empower-yourself/id1208034545',
-      features: ['Leave management', 'Cab booking', 'Employee engagement', 'HR workflows', 'Real-time updates']
-    },
-    {
-      name: 'Ixkio',
-      desc: 'Advanced NFC tag management platform integrating CoreNFC, QR/Barcode scanning, and Vision for reliable read/write/lock flows',
-      tech: ['Swift', 'CoreNFC', 'Vision', 'QR/Barcode', 'Security'],
-      link: 'https://apps.apple.com/us/app/ixkio/id6467871130',
-      features: ['NFC operations', 'Multiple tag types', 'Vision framework', 'Secure workflows', 'Tag locking']
-    },
-    {
-      name: 'Eicher CRM',
-      desc: 'Enterprise CRM providing real-time visibility of critical KPIs across Sales, Services, Spares, Complaints, and On-Road Support',
-      tech: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'Analytics'],
-      link: 'https://apps.apple.com/in/app/eicher-crm/id1467873868',
-      features: ['Real-time dashboards', 'Sales tracking', 'Service management', 'Analytics', 'KPI monitoring']
-    },
-    {
-      name: 'Jimmy John\'s International',
-      desc: 'Optimized iOS e-commerce experience with fast order placement, secure payments, personalized recommendations, and loyalty integration',
-      tech: ['Swift', 'UIKit', 'Stripe', 'Push Notifications', 'E-commerce'],
-      link: 'https://apps.apple.com/ca/app/jimmy-johns-international/id6569244964',
-      features: ['Quick ordering', 'Loyalty integration', 'Recommendations', 'Secure payments', 'Order tracking']
-    }
-  ];
-
-  const experience = [
-    {
-      title: 'Senior iOS Developer',
-      company: 'Techmatic Systems India Pvt. Ltd.',
-      period: 'Apr 2025 - Present',
-      location: 'Hyderabad, Telangana',
-      highlights: [
-        'Leading iOS development for 3 large-scale SaaS platforms',
-        'Reduced crash rates by ~30% through Instruments profiling',
-        'Integrated Firebase, Apple Pay, MapKit, and barcode scanning',
-        'Mentored junior developers and scaled delivery pipelines'
-      ]
-    },
-    {
-      title: 'iOS Developer',
-      company: 'Mindcrew Technologies Pvt. Ltd.',
-      period: 'Apr 2023 - Apr 2025',
-      location: 'Indore, MP',
-       highlights: [
-        'Developed iOS applications from scratch to App Store',
-        'Implemented MVVM architecture and clean code practices',
-        'Integrated third-party SDKs and RESTful APIs',
-        'Managed releases via TestFlight and Git workflows'
-      ]
-    },
-    {
-      title: 'Associate Software Engineer (iOS)',
-      company: 'Softude Infotech Pvt. Ltd.',
-      period: 'June 2021 - Dec 2022',
-      location: 'Indore, MP',
-      highlights: [
-        'Built enterprise apps for VECV (Volvo Eicher)',
-        'Delivered Eicher CRM and VECV Evolve HRMS applications',
-        'Migrated workflows to async/await patterns for better UX',
-        'Implemented Firebase Performance and Crashlytics monitoring'
-      ]
-    }
-  ];
-
-  const stats = [
-    { number: '12+', label: 'Apps Shipped' },
-    { number: '4+', label: 'Years Experience' },
-    { number: '40%', label: 'Crash Reduction' },
-    { number: '3', label: 'Companies' }
-  ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-sm shadow-lg shadow-pink-500/10' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white bg-gradient-to-br from-pink-500 to-purple-600 w-12 h-12 rounded-full flex items-center justify-center">TV</h1>
-          <div className="hidden md:flex space-x-8">
-            {['Home', 'About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
+    <main className="min-h-screen overflow-hidden bg-[#08090b] text-white selection:bg-emerald-300 selection:text-slate-950">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.14),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.04)_0,transparent_35%)]" />
+      <div className="pointer-events-none fixed inset-0 opacity-[0.035] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:48px_48px]" />
+      <nav className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'border-b border-white/10 bg-[#08090b]/88 shadow-2xl shadow-black/30 backdrop-blur-xl' : 'bg-transparent'}`}>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+          <button onClick={() => scrollToSection('about')} className="flex items-center gap-3" aria-label="Go to top">
+            <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.06] text-sm font-bold text-emerald-300 shadow-lg shadow-emerald-950/20 transition group-hover:border-emerald-300/30">TV</span>
+            <span className="hidden text-left sm:block">
+              <span className="block text-sm font-semibold leading-5">Tushar Vijayvargiya</span>
+              <span className="block text-xs text-slate-400">Senior iOS Developer</span>
+            </span>
+          </button>
+
+          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 md:flex">
+            {navItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className={`transition-colors ${activeSection === item.toLowerCase() ? 'text-pink-500' : 'text-gray-300 hover:text-white'}`}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`rounded-full px-4 py-2 text-sm transition duration-300 ${activeSection === item.id ? 'bg-white text-slate-950 shadow-lg shadow-white/10' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
               >
-                {item}
+                {item.label}
               </button>
             ))}
           </div>
-          <a 
-  href="https://drive.google.com/uc?export=download&id=1s_IoLY2Rvo2YLRJ5PExH5HpkNw2fwniO"
-  download="Tushar_Vijayvargiya_CV.pdf"
-  className="bg-gradient-to-r from-pink-500 to-rose-500 px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-pink-500/50 transition-all flex items-center gap-2"
->
-  <Download className="w-4 h-4" />
-  Download CV
-</a>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="/CV_Tushar_Vijayvargiya.pdf"
+              download
+              className="hidden items-center gap-2 rounded-full bg-emerald-300 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-950/30 transition duration-300 hover:-translate-y-0.5 hover:bg-white sm:inline-flex"
+            >
+              <Download className="h-4 w-4" />
+              CV
+            </a>
+            <button
+              onClick={() => setIsMenuOpen((open) => !open)}
+              className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.06] md:hidden"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
+
+        {isMenuOpen && (
+          <div className="border-t border-white/10 bg-[#08090b]/95 px-5 pb-5 backdrop-blur-xl md:hidden">
+            <div className="grid gap-2 pt-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm text-slate-200"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <a
+                href="/CV_Tushar_Vijayvargiya.pdf"
+                download
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-300 px-4 py-3 text-sm font-semibold text-slate-950"
+              >
+                <Download className="h-4 w-4" />
+                Download CV
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
-      <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
-        <div className="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-gray-400 text-lg">Hello, I'm</p>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Tushar<br />Vijayvargiya
-              </h1>
-              <p className="text-2xl text-pink-500 font-semibold pt-2">Senior iOS Developer</p>
-            </div>
-            <p className="text-gray-400 text-lg max-w-lg leading-relaxed">
-              Hey there! With 4+ years of iOS development expertise, I specialize in crafting exceptional mobile experiences using Swift, UIKit, and cutting-edge frameworks. Let's collaborate and turn your vision into reality!
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a href="https://github.com/tusharvijay24" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-lg hover:bg-pink-500 transition-all border border-zinc-800">
-                <Github className="w-6 h-6" />
-              </a>
-              <a href="https://linkedin.com/in/tusharvijayvargiya" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-lg hover:bg-pink-500 transition-all border border-zinc-800">
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a href="https://www.instagram.com/btwittstushar/" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-lg hover:bg-pink-500 transition-all border border-zinc-800">
-                <Instagram className="w-6 h-6" />
-              </a>
-              <a href="https://www.facebook.com/Tusharvj24/" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-lg hover:bg-pink-500 transition-all border border-zinc-800">
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="p-3 bg-zinc-900 rounded-lg hover:bg-pink-500 transition-all border border-zinc-800">
-                <Mail className="w-6 h-6" />
-              </a>
-            </div>
-            <div className="pt-6 space-y-3 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-pink-500" />
-                <a href="tel:+917389548853" className="hover:text-pink-500 transition-colors">+91 7389548853</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-pink-500" />
-                <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="hover:text-pink-500 transition-colors">tusharvijayvargiya24112000@gmail.com</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-pink-500" />
-                <span>Indore, MP, India</span>
-              </div>
-            </div>
+      <section id="about" className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-5 pb-20 pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+        <div className="animate-rise">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm text-emerald-200 shadow-lg shadow-emerald-950/20">
+            <Sparkles className="h-4 w-4 animate-soft-pulse" />
+            Available for iOS roles and freelance builds
           </div>
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-96 h-96 rounded-3xl overflow-hidden border-4 border-pink-500/20 shadow-2xl shadow-pink-500/20">
-                <img src="/tushar.jpg" alt="Tushar Vijayvargiya" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-pink-500 to-rose-500 px-6 py-3 rounded-xl shadow-xl">
-                <p className="text-sm font-semibold">4+ Years Experience</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button onClick={() => scrollToSection('about')} className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-8 h-8 text-pink-500" />
-        </button>
-      </section>
+          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
+            Building polished iOS apps that are stable, scalable, and ready for the App Store.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            I am Tushar Vijayvargiya, a Senior iOS Developer with 5+ years of experience shipping Swift, Objective-C, UIKit, and SwiftUI apps across e-commerce, enterprise, NFC, food ordering, utilities, and social commerce products.
+          </p>
 
-      <section id="about" className="py-12 px-6 bg-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold">About <span className="text-pink-500">Me</span></h2>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              onClick={() => scrollToSection('apps')}
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-300"
+            >
+              View App Work
+              <ArrowUpRight className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+            <a
+              href="mailto:tusharvijayvargiya24112000@gmail.com"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300/40 hover:bg-emerald-300/10"
+            >
+              <Mail className="h-4 w-4" />
+              Contact Me
+            </a>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-pink-500">iOS Development Expert</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Experienced iOS Developer with 4+ years specializing in Swift, Objective-C, and UIKit. I've delivered 12+ production apps across e-commerce, healthcare, and enterprise domains, consistently focusing on clean architecture, performance optimization, and reliability.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                My expertise spans the full iOS development lifecycle—from initial architecture design through App Store deployment. I'm passionate about creating exceptional user experiences while maintaining code quality and app stability.
-              </p>
-              <div className="grid grid-cols-2 gap-4 pt-4">
-               <a href="https://www.udemy.com/certificate/UC-a8c3bbfc-e1ca-4f5c-a365-f548d5e5e278/" target="_blank" rel="noopener noreferrer" className="block">
-  <div className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 p-6 rounded-xl border border-purple-500/20 cursor-pointer hover:shadow-lg transition-shadow">
-    <Award className="w-10 h-10 text-pink-500 mb-3" />
-    <p className="text-sm text-gray-400">iOS Bootcamp</p>
-    <p className="font-semibold text-lg">Certified</p>
-  </div>
-</a>
 
-                <div className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 p-6 rounded-xl border border-purple-500/20">
-                  <Briefcase className="w-10 h-10 text-pink-500 mb-3" />
-                  <p className="text-sm text-gray-400">B.Tech - EC</p>
-                  <p className="font-semibold text-lg">MIT Indore</p>
-                </div>
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {metrics.map((metric, index) => (
+              <Reveal key={metric.label} delay={index * 80}>
+              <div className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/25 hover:bg-white/[0.07]">
+                <div className="text-3xl font-semibold text-white">{metric.value}</div>
+                <div className="mt-1 text-sm leading-5 text-slate-400">{metric.label}</div>
               </div>
-            </div>
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-6">
-                {stats.map((stat, idx) => (
-                  <div key={idx} className="bg-gradient-to-br from-purple-900/40 to-purple-600/20 p-8 rounded-2xl border border-purple-500/30 text-center hover:border-purple-500/50 transition-all backdrop-blur-sm">
-                    <h4 className="text-5xl font-bold text-white mb-2">{stat.number}</h4>
-                    <p className="text-gray-300 text-base">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
-                <h4 className="text-xl font-semibold mb-4 text-pink-500">Core Values</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300">Delivering exceptional quality with clean, maintainable code</p>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300">Performance-first approach with crash rate reduction focus</p>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300">Continuous learning and mentorship of junior developers</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" className="py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold">Technical <span className="text-pink-500">Expertise</span></h2>
-          </div>
-          <div className="space-y-8">
-            {Object.entries(skillCategories).map(([category, skills]) => (
-              <div key={category} className="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
-                <h3 className="text-xl font-semibold text-pink-500 mb-4">{category}</h3>
-                <div className="flex flex-wrap gap-3">
-                  {skills.map((skill, idx) => (
-                    <span key={idx} className="px-4 py-2 bg-zinc-800 text-gray-300 rounded-lg text-sm border border-zinc-700 hover:border-pink-500 hover:bg-zinc-700 transition-all">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
 
-      <section id="experience" className="py-12 px-6 bg-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold">Work <span className="text-pink-500">Experience</span></h2>
-          </div>
-          <div className="space-y-6">
-            {experience.map((job, idx) => (
-              <div key={idx} className="bg-zinc-900 p-8 rounded-xl border border-zinc-800 hover:border-pink-500/50 transition-all">
-                <div className="flex flex-wrap justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-pink-500">{job.title}</h3>
-                    <p className="text-xl text-white mt-1">{job.company}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-gray-400">{job.period}</p>
-                    <p className="text-gray-500 text-sm">{job.location}</p>
-                  </div>
+        <aside className="animate-rise-delay relative mx-auto w-full max-w-md lg:ml-auto">
+          <div className="card-shine rounded-[2rem] border border-white/10 bg-white/[0.06] p-3 shadow-2xl shadow-black/40 backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-emerald-300/25">
+            <div className="overflow-hidden rounded-[1.5rem] bg-slate-950">
+              <img src="/tushar.jpg" alt="Tushar Vijayvargiya" className="h-[30rem] w-full object-cover object-center transition duration-700 hover:scale-[1.03]" />
+            </div>
+            <div className="p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-semibold">Tushar Vijayvargiya</h2>
+                  <p className="mt-1 text-sm text-emerald-200">Senior iOS Developer</p>
                 </div>
-                <ul className="space-y-2 mt-4">
-                  {job.highlights.map((highlight, hidx) => (
-                    <li key={hidx} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">{highlight}</p>
-                    </li>
-                  ))}
-                </ul>
+                <img src="/swift-bird.png" alt="Swift logo" className="h-12 w-12 rounded-2xl border border-white/10 bg-white p-2 shadow-lg shadow-black/25" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold">Featured <span className="text-pink-500">Projects</span></h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, idx) => (
-              <div key={idx} className="bg-zinc-900 p-6 rounded-xl border border-zinc-800 hover:border-pink-500 transition-all hover:transform hover:scale-105 duration-300">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-white">{project.name}</h3>
-                  <Apple className="w-6 h-6 text-pink-500" />
+              <div className="mt-5 grid gap-3 text-sm text-slate-300">
+                <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3 transition hover:bg-white/10">
+                  <Mail className="h-4 w-4 text-emerald-300" />
+                  tusharvijayvargiya24112000@gmail.com
+                </a>
+                <a href="tel:+917389548853" className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3 transition hover:bg-white/10">
+                  <Phone className="h-4 w-4 text-emerald-300" />
+                  +91 7389548853
+                </a>
+                <div className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3">
+                  <MapPin className="h-4 w-4 text-emerald-300" />
+                  Gurgaon / Indore
                 </div>
-                <p className="text-gray-400 mb-4 text-sm leading-relaxed">{project.desc}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, tidx) => (
-                    <span key={tidx} className="px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full text-xs border border-pink-500/20">{tech}</span>
-                  ))}
-                </div>
-                <div className="space-y-1 mb-4">
-                  {project.features.slice(0, 4).map((feature, fidx) => (
-                    <p key={fidx} className="text-gray-500 text-xs flex items-center gap-2">
-                      <span className="w-1 h-1 bg-pink-500 rounded-full flex-shrink-0"></span>
-                      {feature}
-                    </p>
-                  ))}
-                </div>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-pink-500 hover:text-pink-400 transition-colors text-sm font-medium">
-                  View on App Store <ExternalLink className="w-4 h-4" />
+              </div>
+              <div className="mt-5 flex gap-3">
+                <a href="https://github.com/tusharvijay24" target="_blank" rel="noopener noreferrer" className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04] transition hover:bg-white hover:text-slate-950" aria-label="GitHub">
+                  <Github className="h-5 w-5" />
+                </a>
+                <a href="https://linkedin.com/in/tusharvijayvargiya" target="_blank" rel="noopener noreferrer" className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04] transition hover:bg-white hover:text-slate-950" aria-label="LinkedIn">
+                  <Linkedin className="h-5 w-5" />
                 </a>
               </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section className="relative border-y border-white/10 bg-white/[0.03] px-5 py-8">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
+          {[
+            ['Clean Architecture', 'MVVM, modular components, reusable UI'],
+            ['Native Integrations', 'Firebase, Apple Pay, maps, NFC, camera'],
+            ['Release Ownership', 'TestFlight, App Store, debugging, support'],
+            ['Product Mindset', 'Stable UX, measurable outcomes, team delivery'],
+          ].map(([title, text], index) => (
+            <Reveal key={title} delay={index * 70}>
+            <div className="flex gap-3 rounded-2xl p-3 transition duration-300 hover:bg-white/[0.04]">
+              <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-emerald-300" />
+              <div>
+                <h3 className="font-semibold text-white">{title}</h3>
+                <p className="mt-1 text-sm leading-6 text-slate-400">{text}</p>
+              </div>
+            </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section id="experience" className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
+        <Reveal>
+          <SectionHeader
+            eyebrow="Resume"
+            title="Experience shaped by real production apps"
+            text="I work across product planning, architecture, API integration, native iOS features, QA feedback, releases, and production issue resolution."
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-5">
+          {experience.map((job, index) => (
+            <Reveal key={`${job.company}-${job.period}`} delay={index * 110}>
+            <article className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-emerald-950/20 md:p-8">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <p className="text-sm font-medium text-emerald-200">{job.period}</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-white">{job.role}</h3>
+                  <p className="mt-1 text-slate-300">{job.company}</p>
+                </div>
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-black/20 px-4 py-2 text-sm text-slate-300 transition group-hover:border-emerald-300/25">
+                  <MapPin className="h-4 w-4 text-emerald-300" />
+                  {job.location}
+                </div>
+              </div>
+              <div className="mt-6 grid gap-3">
+                {job.points.map((point) => (
+                  <p key={point} className="flex gap-3 text-sm leading-7 text-slate-300">
+                    <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.55)]" />
+                    {point}
+                  </p>
+                ))}
+              </div>
+            </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section id="apps" className="relative bg-[#0d0f12] px-5 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Selected Apps"
+              title="App Store products, enterprise tools, and native iOS systems"
+              text="Instead of showing generic cards, this portfolio focuses on real shipped apps and the engineering responsibilities behind them."
+            />
+          </Reveal>
+          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-2">
+            {appProjects.map((project, index) => (
+              <Reveal key={project.name} className="h-full" delay={(index % 2) * 120}>
+              <article className="group flex h-full min-h-[34rem] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] transition duration-500 hover:-translate-y-2 hover:border-emerald-300/30 hover:bg-white/[0.07] hover:shadow-2xl hover:shadow-black/40">
+                <div className="grid min-h-full w-full gap-0 md:grid-cols-[0.8fr_1.2fr]">
+                  <div className={`relative flex min-h-72 items-center bg-gradient-to-br ${project.accent} p-6`}>
+                    <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.28),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(0,0,0,0.34),transparent_45%)]" />
+                    <div className="phone-float relative mx-auto flex h-64 w-36 flex-col rounded-[2rem] border-4 border-slate-950 bg-slate-950 p-2 shadow-2xl shadow-black/40 transition duration-500 group-hover:rotate-0 group-hover:scale-[1.03]">
+                      <div className="mx-auto mb-2 h-3 w-14 rounded-full bg-white/20" />
+                      <div className="flex flex-1 flex-col justify-between rounded-[1.4rem] bg-white p-3 text-slate-950">
+                        <div>
+                          <div className={`mb-3 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${project.accent} text-lg font-bold text-white`}>
+                            {project.name.slice(0, 2).toUpperCase()}
+                          </div>
+                          <p className="text-xs font-semibold text-slate-500">{project.category}</p>
+                          <p className="mt-1 text-lg font-bold leading-5">{project.name}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-2 rounded-full bg-slate-200" />
+                          <div className="h-2 w-2/3 rounded-full bg-slate-200" />
+                          <div className={`scan-line h-8 rounded-xl bg-gradient-to-r ${project.accent}`} />
+                        </div>
+                      </div>
+                    </div>
+                    <span className="absolute left-5 top-5 rounded-full bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur">0{index + 1}</span>
+                  </div>
+                  <div className="flex h-full flex-col p-6 md:p-8">
+                    <div className="flex items-center gap-2 text-sm font-medium text-emerald-200">
+                      <Apple className="h-4 w-4" />
+                      {project.category}
+                    </div>
+                    <h3 className="mt-3 text-2xl font-semibold text-white">{project.name}</h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-300">{project.summary}</p>
+                    <p className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-6 text-slate-200">{project.outcome}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/link mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-emerald-200 transition hover:text-white">
+                      View on App Store
+                      <ArrowUpRight className="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </a>
+                  </div>
+                </div>
+              </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contact" className="py-20 px-6 bg-zinc-950">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Work <span className="text-pink-500">Together</span></h2>
-          <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-            Looking for a skilled iOS developer? I'm available for freelance projects, full-time opportunities, 
-            and consulting work. Let's create something exceptional together.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="bg-gradient-to-r from-pink-500 to-rose-500 px-8 py-4 rounded-lg hover:shadow-lg hover:shadow-pink-500/50 transition-all inline-flex items-center gap-2">
-              <Mail className="w-5 h-5" />Send Email
-            </a>
-            <a href="tel:+917389548853" className="bg-zinc-900 px-8 py-4 rounded-lg hover:bg-pink-500 transition-all inline-flex items-center gap-2 border border-zinc-800">
-              <Phone className="w-5 h-5" />Call Me
-            </a>
+      <section id="skills" className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
+        <Reveal>
+          <SectionHeader
+            eyebrow="Technical Stack"
+            title="Skills organized around delivery, not buzzwords"
+            text="The focus is native iOS engineering, production architecture, and integrations that directly affect shipped mobile products."
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {skillGroups.map((group, index) => (
+            <Reveal key={group.title} delay={index * 90}>
+            <article className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/25 hover:bg-white/[0.065]">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-300/10 text-emerald-200 transition duration-300 group-hover:bg-emerald-300 group-hover:text-slate-950">
+                  <Code2 className="h-5 w-5" />
+                </div>
+                <h3 className="text-xl font-semibold">{group.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-sm text-slate-300">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative bg-white text-slate-950">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+          <Reveal className="text-slate-950">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">What I Can Help With</p>
+            <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">iOS engineering support from idea to release.</h2>
           </div>
-          <div className="flex justify-center gap-4 mt-8">
-            <a href="https://www.instagram.com/btwittstushar/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a href="https://www.facebook.com/Tusharvj24/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a href="https://linkedin.com/in/tusharvijayvargiya" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a href="https://github.com/tusharvijay24" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-              <Github className="w-6 h-6" />
-            </a>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {services.map((service, index) => (
+              <Reveal key={service} delay={index * 80}>
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:bg-white hover:shadow-xl hover:shadow-slate-200/70">
+                <ShieldCheck className="h-6 w-6 text-emerald-700" />
+                <p className="mt-4 font-medium leading-6">{service}</p>
+              </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-zinc-900">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-500">© 2025 Tushar Vijayvargiya. ALL RIGHTS RESERVED</p>
+      <section id="contact" className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
+        <Reveal>
+        <div className="card-shine rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 md:p-10">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm text-emerald-200">
+                <Rocket className="h-4 w-4" />
+                Let us build something production-ready
+              </div>
+              <h2 className="text-4xl font-semibold leading-tight md:text-5xl">Need a reliable iOS developer for your app?</h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+                I am available for full-time iOS roles, freelance app development, app modernization, native integrations, and release support.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-300 hover:-translate-y-0.5 hover:bg-white">
+                  <Mail className="h-4 w-4" />
+                  Send Email
+                </a>
+                <a href="tel:+917389548853" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-slate-950">
+                  <Phone className="h-4 w-4" />
+                  Call Me
+                </a>
+              </div>
+            </div>
+            <div className="grid gap-4">
+              <InfoCard icon={<BriefcaseBusiness className="h-5 w-5" />} label="Current focus" value="Swift, UIKit, SwiftUI, Firebase, Maps, Payments, NFC" />
+              <InfoCard icon={<Award className="h-5 w-5" />} label="Education" value="B.Tech EC, MIT Indore + iOS Bootcamp Certified" />
+              <InfoCard icon={<MapPin className="h-5 w-5" />} label="Location" value="Gurgaon / Indore. Open to remote and hybrid roles." />
+            </div>
+          </div>
         </div>
+        </Reveal>
+      </section>
+
+      <footer className="relative border-t border-white/10 px-5 py-8 text-center text-sm text-slate-500">
+        <p>Copyright © {currentYear} Tushar Vijayvargiya. All rights reserved.</p>
       </footer>
+    </main>
+  );
+}
+
+function SectionHeader({ eyebrow, title, text }) {
+  return (
+    <div className="max-w-3xl">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">{eyebrow}</p>
+      <h2 className="mt-4 text-4xl font-semibold leading-tight text-white md:text-5xl">{title}</h2>
+      <p className="mt-5 text-lg leading-8 text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function Reveal({ children, className = '', delay = 0 }) {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return undefined;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.16 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${isVisible ? 'is-visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function InfoCard({ icon, label, value }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/20 p-5 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/25 hover:bg-black/30">
+      <div className="flex items-center gap-3 text-emerald-200">
+        {icon}
+        <p className="text-sm font-medium">{label}</p>
+      </div>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{value}</p>
     </div>
   );
 }
