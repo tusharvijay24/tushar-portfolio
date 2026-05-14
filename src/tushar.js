@@ -95,6 +95,28 @@ const appProjects = [
     link: 'https://apps.apple.com/in/app/bc-starter/id1062799070',
     accent: 'from-fuchsia-500 to-pink-500',
   },
+  {
+    name: 'PetPlayPartner',
+    category: 'Social Networking',
+    summary:
+      'Social networking platform exclusively for pets and their owners to connect, share moments, and find playmates worldwide.',
+    stack: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'Firebase'],
+    outcome:
+      'Built pet video profiles, global search, connection requests, and owner-to-owner messaging for a niche social platform.',
+    link: 'https://apps.apple.com/in/app/petplaypartner/id6757954029',
+    accent: 'from-lime-400 to-green-500',
+  },
+  {
+    name: '3Fam',
+    category: 'Personal Safety',
+    summary:
+      'Emergency safety app enabling instant SOS alerts with live location, background audio recording, and quick access to nearby emergency services.',
+    stack: ['Swift', 'CoreLocation', 'MapKit', 'AVFoundation', 'WidgetKit'],
+    outcome:
+      'Delivered multi-method SOS activation including widgets, back tap, voice commands, and lock screen access with real-time location sharing.',
+    link: 'https://apps.apple.com/in/app/3fam/id6755695418',
+    accent: 'from-sky-400 to-blue-600',
+  },
 ];
 
 const experience = [
