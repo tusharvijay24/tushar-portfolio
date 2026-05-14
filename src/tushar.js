@@ -458,7 +458,7 @@ export default function Portfolio() {
                             {project.name.slice(0, 2).toUpperCase()}
                           </div>
                           <p className="text-xs font-semibold text-slate-500">{project.category}</p>
-                          <p className="mt-1 text-lg font-bold leading-5">{project.name}</p>
+                          <p className="mt-1 text-base font-bold leading-5 break-words">{project.name}</p>
                         </div>
                         <div className="space-y-2">
                           <div className="h-2 rounded-full bg-slate-200" />
@@ -485,7 +485,7 @@ export default function Portfolio() {
                       ))}
                     </div>
                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/link mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-emerald-200 transition hover:text-white">
-                      View on App Store
+                      {project.category === 'E-commerce Web' ? 'View Website' : 'View on App Store'}
                       <ArrowUpRight className="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                     </a>
                   </div>
@@ -558,9 +558,9 @@ export default function Portfolio() {
                 <Rocket className="h-4 w-4" />
                 Let us build something production-ready
               </div>
-              <h2 className="text-4xl font-semibold leading-tight md:text-5xl">Need a reliable iOS developer for your app?</h2>
+              <h2 className="text-4xl font-semibold leading-tight md:text-5xl">Need a reliable iOS or web developer for your product?</h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-                I am available for full-time iOS roles, freelance app development, app modernization, native integrations, and release support.
+                I am available for full-time iOS or web roles, freelance app development, app modernization, native integrations, and release support.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="mailto:tusharvijayvargiya24112000@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-300 hover:-translate-y-0.5 hover:bg-white">
@@ -574,7 +574,7 @@ export default function Portfolio() {
               </div>
             </div>
             <div className="grid gap-4">
-              <InfoCard icon={<BriefcaseBusiness className="h-5 w-5" />} label="Current focus" value="Swift, UIKit, SwiftUI, Firebase, Maps, Payments, NFC" />
+              <InfoCard icon={<BriefcaseBusiness className="h-5 w-5" />} label="Current focus" value="Swift, UIKit, SwiftUI, React, Next.js, Firebase, Maps, Payments, NFC" />
               <InfoCard icon={<Award className="h-5 w-5" />} label="Education" value="B.Tech EC, MIT Indore + iOS Bootcamp Certified" />
               <InfoCard icon={<MapPin className="h-5 w-5" />} label="Location" value="Gurgaon / Indore. Open to remote and hybrid roles." />
             </div>
