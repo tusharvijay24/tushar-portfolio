@@ -442,7 +442,7 @@ export default function Portfolio() {
                             {project.name.slice(0, 2).toUpperCase()}
                           </div>
                           <p className="text-xs font-semibold text-slate-500">{project.category}</p>
-                          <p className="mt-1 truncate text-lg font-bold leading-5">{project.name}</p>
+                          <p className="mt-1 text-lg font-bold leading-5">{project.name}</p>
                         </div>
                         <div className="space-y-2">
                           <div className="h-2 rounded-full bg-slate-200" />
