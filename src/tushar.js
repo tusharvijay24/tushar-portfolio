@@ -379,10 +379,10 @@ export default function Portfolio() {
       <section className="relative border-y border-white/10 bg-white/[0.03] px-5 py-8">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
           {[
-            ['Clean Architecture', 'MVVM, modular components, reusable UI'],
-            ['Native Integrations', 'Firebase, Apple Pay, maps, NFC, camera'],
-            ['Release Ownership', 'TestFlight, App Store, debugging, support'],
-            ['Product Mindset', 'Stable UX, measurable outcomes, team delivery'],
+            ['Clean Architecture', 'MVVM, modular components, reusable UI, component-driven web'],
+            ['Native Integrations', 'Firebase, Apple Pay, maps, NFC, camera, REST APIs, PocketBase'],
+            ['Release Ownership', 'TestFlight, App Store, CI/CD, GitHub Actions, debugging, support'],
+            ['Product Mindset', 'Stable UX, measurable outcomes, iOS & web delivery'],
           ].map(([title, text], index) => (
             <Reveal key={title} delay={index * 70}>
             <div className="flex gap-3 rounded-2xl p-3 transition duration-300 hover:bg-white/[0.04]">
