@@ -61,7 +61,7 @@ vercel --prod
 
 ## Contact
 
-- Email: tusharvijay24@gmail.com
+- Email: tusharvijay24112000@gmail.com
 - GitHub: https://github.com/tusharvijay24
 - LinkedIn: https://linkedin.com/in/tushar-vijayvargiya
 - Portfolio: https://tusharvijayvargiya.com
