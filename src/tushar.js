@@ -31,7 +31,7 @@ const metrics = [
   { value: '10+', label: 'Production apps shipped' },
   { value: '5+', label: 'Years building iOS apps' },
   { value: '8+', label: 'App Store products' },
-  { value: '~30%', label: 'Crash reduction delivered' },
+  { value: '2+', label: 'Web products in production' },
 ];
 
 const appProjects = [
@@ -116,6 +116,17 @@ const appProjects = [
     link: 'https://apps.apple.com/in/app/3fam/id6755695418',
     accent: 'from-sky-400 to-blue-600',
   },
+  {
+    name: 'Latkanwali.in',
+    category: 'E-commerce Web',
+    summary:
+      'Full-stack production e-commerce storefront and admin for a live fashion brand, built with Next.js, PocketBase, and Razorpay.',
+    stack: ['Next.js', 'React', 'TypeScript', 'PocketBase', 'Tailwind CSS'],
+    outcome:
+      'Shipped complete storefront, admin panel, order management, payments, shipping integration, and WhatsApp OTP auth end-to-end.',
+    link: 'https://latkanwali.in',
+    accent: 'from-orange-400 to-rose-500',
+  },
 ];
 
 const experience = [
@@ -164,12 +175,16 @@ const skillGroups = [
     items: ['AVFoundation', 'CoreLocation', 'MapKit', 'CoreNFC', 'Vision', 'ARKit', 'StoreKit', 'HealthKit'],
   },
   {
+    title: 'Web Development',
+    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Node.js', 'REST APIs', 'PocketBase'],
+  },
+  {
     title: 'Architecture',
     items: ['MVVM', 'MVC', 'Clean Architecture', 'Modular Design', 'Reusable Components', 'Design Systems'],
   },
   {
     title: 'Product Delivery',
-    items: ['REST APIs', 'Firebase', 'Push Notifications', 'Deep Links', 'Fastlane', 'TestFlight', 'Tuist', 'mise'],
+    items: ['Firebase', 'Push Notifications', 'Deep Links', 'Fastlane', 'TestFlight', 'Tuist', 'mise', 'GitHub Actions'],
   },
 ];
 
@@ -177,6 +192,7 @@ const services = [
   'Production iOS app development',
   'App modernization and UIKit to SwiftUI migration',
   'Firebase, maps, payments, NFC, and scanning integrations',
+  'Full-stack web development with React and Next.js',
   'Crash debugging, profiling, and release support',
 ];
 
@@ -218,7 +234,7 @@ export default function Portfolio() {
             <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.06] text-sm font-bold text-emerald-300 shadow-lg shadow-emerald-950/20 transition group-hover:border-emerald-300/30">TV</span>
             <span className="hidden text-left sm:block">
               <span className="block text-sm font-semibold leading-5 text-white">Tushar Vijayvargiya</span>
-              <span className="block text-xs text-slate-300">Senior iOS Developer</span>
+              <span className="block text-xs text-slate-300">Senior iOS & Web Developer</span>
             </span>
           </button>
 
@@ -282,13 +298,13 @@ export default function Portfolio() {
         <div className="animate-rise">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm text-emerald-200 shadow-lg shadow-emerald-950/20">
             <Sparkles className="h-4 w-4 animate-soft-pulse" />
-            Available for iOS roles and freelance builds
+            Available for iOS & web roles and freelance builds
           </div>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
-            Building polished iOS apps that are stable, scalable, and ready for the App Store.
+            Building polished iOS and web apps that are stable, scalable, and ready for production.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            I am Tushar Vijayvargiya, a Senior iOS Developer with 5+ years of experience shipping Swift, Objective-C, UIKit, and SwiftUI apps across e-commerce, enterprise, NFC, food ordering, utilities, and social commerce products.
+            I am Tushar Vijayvargiya, a Senior iOS Developer with 5+ years of experience shipping Swift, Objective-C, UIKit, and SwiftUI apps across e-commerce, enterprise, NFC, food ordering, utilities, and social commerce products. I also build full-stack web products using React and Next.js.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
