@@ -99,10 +99,9 @@ const appProjects = [
     name: 'PetPlayPartner',
     category: 'Social Networking',
     summary:
-      'Social networking platform exclusively for pets and their owners to connect, share moments, and find playmates worldwide.',
+      'Social platform for pets and owners to create profiles, discover playmates worldwide, and connect through a dedicated pet network.',
     stack: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'Firebase'],
-    outcome:
-      'Built pet video profiles, global search, connection requests, and owner-to-owner messaging for a niche social platform.',
+    outcome: 'Built pet video profiles, global search, connection requests, and owner-to-owner messaging for a niche social platform.',
     link: 'https://apps.apple.com/in/app/petplaypartner/id6757954029',
     accent: 'from-lime-400 to-green-500',
   },
