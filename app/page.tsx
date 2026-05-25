@@ -148,7 +148,7 @@ const appProjects: AppProject[] = [
     stack: ["Swift", "UIKit", "MVVM", "REST APIs", "Firebase"],
     outcome:
       "Built pet video profiles, global search, connection requests, and owner-to-owner messaging for a niche social platform.",
-    link: "https://apps.apple.com/us/app/petplaypartner/id6504684737",
+    link: "https://apps.apple.com/in/app/petplaypartner/id6757954029",
     accent: "from-sky-400 to-indigo-500",
     size: "md",
   },
@@ -160,7 +160,7 @@ const appProjects: AppProject[] = [
     stack: ["Swift", "CoreLocation", "MapKit", "AVFoundation", "WidgetKit"],
     outcome:
       "Delivered multi-method SOS activation including widgets, back tap, voice commands, and lock screen access with real-time location sharing.",
-    link: "https://apps.apple.com/us/app/3fam/id6504684738",
+    link: "https://apps.apple.com/in/app/3fam/id6755695418",
     accent: "from-red-500 to-rose-600",
     size: "md",
   },
