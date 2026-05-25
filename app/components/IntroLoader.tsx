@@ -29,6 +29,16 @@ export default function IntroLoader() {
     const start = performance.now();
     const dur = 1400;
     let raf = 0;
+    let dismissed = false;
+    const finish = () => {
+      if (dismissed) return;
+      dismissed = true;
+      setProgress(100);
+      setDone(true);
+      // Restore scroll defensively in case the cleanup hasn't run yet.
+      document.documentElement.style.overflow = "";
+    };
+
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / dur);
       // Ease-out cubic for the number readout
@@ -37,13 +47,20 @@ export default function IntroLoader() {
       if (t < 1) {
         raf = requestAnimationFrame(tick);
       } else {
-        setTimeout(() => setDone(true), 220);
+        // Tiny grace before fade-out so 100% is visible
+        setTimeout(finish, 180);
       }
     };
     raf = requestAnimationFrame(tick);
 
+    // Hard safety: even if the page is mid-jank, RAF stalls, or a tab is
+    // backgrounded, the loader MUST be gone after 2.4s. This is the fix for
+    // the mobile "stuck loader" report.
+    const safety = window.setTimeout(finish, 2400);
+
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(safety);
       document.documentElement.style.overflow = "";
     };
   }, []);

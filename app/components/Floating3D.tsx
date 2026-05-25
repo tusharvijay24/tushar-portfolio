@@ -101,6 +101,17 @@ export default function Floating3D({
   const [mount, setMount] = useState(false);
 
   useEffect(() => {
+    // Skip 3D entirely on touch / coarse-pointer devices — a Canvas + R3F
+    // mesh per section is the single biggest reason mobile scroll feels
+    // janky on this site.
+    if (typeof window !== "undefined") {
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (coarse || reduceMotion) return;
+    }
+
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(

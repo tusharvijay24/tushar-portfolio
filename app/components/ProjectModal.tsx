@@ -60,7 +60,7 @@ export default function ProjectModal({ project, onClose }: Props) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.22 }}
           onClick={onClose}
-          className="fixed inset-0 z-[180] grid place-items-center bg-black/70 px-4 py-10 backdrop-blur-md"
+          className="fixed inset-0 z-[180] grid place-items-center overflow-y-auto bg-black/70 px-4 py-6 backdrop-blur-md sm:py-10"
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}
@@ -68,7 +68,7 @@ export default function ProjectModal({ project, onClose }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 240, damping: 26 }}
-            className="relative grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#0c0e12]/95 shadow-2xl shadow-black/60 lg:grid-cols-[1.1fr_1fr]"
+            className="relative my-auto grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#0c0e12]/95 shadow-2xl shadow-black/60 lg:grid-cols-[1.1fr_1fr]"
           >
             {/* Visual side */}
             <div
@@ -111,12 +111,12 @@ export default function ProjectModal({ project, onClose }: Props) {
             </div>
 
             {/* Content side */}
-            <div className="flex flex-col p-8 md:p-10">
+            <div className="flex flex-col p-7 pr-14 sm:p-8 sm:pr-16 md:p-10 md:pr-16">
               <button
                 onClick={onClose}
                 aria-label="Close project"
                 data-cursor="hover"
-                className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-300 transition hover:border-white/30 hover:text-white"
+                className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-black/40 text-slate-300 backdrop-blur transition hover:border-white/30 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -124,7 +124,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-emerald-300">
                 {project.category}
               </span>
-              <h3 className="font-display mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+              <h3 className="font-display mt-3 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
                 {project.name}
               </h3>
               <p className="mt-4 text-base leading-7 text-slate-300">

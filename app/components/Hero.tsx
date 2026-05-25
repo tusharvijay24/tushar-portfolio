@@ -300,7 +300,7 @@ function SplitHeadline({
           {line.map((part, pi) => (
             <span
               key={pi}
-              className="word-mask relative mr-[0.25em] inline-block overflow-hidden align-bottom pb-[0.05em]"
+              className="word-mask relative mr-[0.25em] inline-block overflow-hidden align-bottom pb-[0.18em]"
             >
               <span
                 className={

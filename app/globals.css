@@ -6,6 +6,20 @@ html {
   /* Lenis handles smoothing — keep this auto so Lenis doesn't fight CSS */
   scroll-behavior: auto;
   background: #08090b;
+  /* Prevent any descendant decoration (Floating3D negative offsets, blobs, marquee)
+     from causing horizontal scroll on big screens / zoom-out / wide windows. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  /* Match html — kill any horizontal overflow from absolutely positioned decor. */
+  overflow-x: clip;
+  background: #08090b;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 html.lenis,
@@ -20,15 +34,6 @@ html.lenis body {
 }
 .lenis.lenis-stopped {
   overflow: clip;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  background: #08090b;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 button,
@@ -118,6 +123,34 @@ section {
 
 .phone-float {
   animation: phone-float 5.5s ease-in-out infinite;
+}
+
+/* On touch devices, every infinite css animation costs main-thread frames.
+   Disable phone-float + scan-line shimmer on coarse pointers. */
+@media (pointer: coarse) {
+  .phone-float {
+    animation: none !important;
+  }
+  .scan-line::after {
+    animation: none !important;
+    display: none !important;
+  }
+  .marquee-track {
+    animation-duration: 60s !important;
+  }
+  /* Aurora blobs on mobile = giant blurred GPU layers across whole viewport.
+     Cut them in half + freeze them so scroll stays smooth. */
+  .aurora-blob {
+    animation: none !important;
+    opacity: 0.45 !important;
+    filter: blur(80px) !important;
+  }
+  /* Hover translate transforms cause layout-style jank on touch devices that
+     fire fake hover on tap. Neutralise common tilt/lift hover utilities. */
+  .holo-border:hover,
+  .card-shine:hover {
+    transform: none !important;
+  }
 }
 
 .scan-line {

@@ -119,7 +119,7 @@ export default function RevealHeader({
             return (
               <span
                 key={i}
-                className="rh-word-mask relative inline-block overflow-hidden align-bottom pb-[0.06em]"
+                className="rh-word-mask relative inline-block overflow-hidden align-bottom pb-[0.18em]"
               >
                 <span
                   className={
