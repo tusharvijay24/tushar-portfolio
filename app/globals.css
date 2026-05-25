@@ -1,8 +1,25 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis handles smoothing — keep this auto so Lenis doesn't fight CSS */
+  scroll-behavior: auto;
   background: #08090b;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
 }
 
 body {
@@ -14,7 +31,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-button, a {
+button,
+a {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -22,7 +40,9 @@ section {
   scroll-margin-top: 88px;
 }
 
-.site-nav { color: #fff; }
+.site-nav {
+  color: #fff;
+}
 
 .site-nav::before {
   content: "";
@@ -31,90 +51,459 @@ section {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(8,9,11,0.96), rgba(8,9,11,0.86)),
-    radial-gradient(circle at 20% 0%, rgba(16,185,129,0.12), transparent 34%);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+    linear-gradient(180deg, rgba(8, 9, 11, 0.96), rgba(8, 9, 11, 0.86)),
+    radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.12), transparent 34%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: opacity 260ms ease;
 }
 
-.site-nav-scrolled::before { opacity: 1; }
-
-@supports (backdrop-filter: blur(18px)) {
-  .site-nav-scrolled::before { backdrop-filter: blur(18px); }
+.site-nav-scrolled::before {
+  opacity: 1;
 }
 
-.animate-rise { animation: rise 720ms ease-out both; }
-.animate-rise-delay { animation: rise 820ms 120ms ease-out both; }
+@supports (backdrop-filter: blur(18px)) {
+  .site-nav-scrolled::before {
+    backdrop-filter: blur(18px);
+  }
+}
+
+.animate-rise {
+  animation: rise 720ms ease-out both;
+}
+
+.animate-rise-delay {
+  animation: rise 820ms 120ms ease-out both;
+}
 
 .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition:
-    opacity 720ms cubic-bezier(0.2,0.8,0.2,1),
-    transform 720ms cubic-bezier(0.2,0.8,0.2,1);
+    opacity 720ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: opacity, transform;
 }
 
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-.card-shine { position: relative; overflow: hidden; }
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
 
 .card-shine::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 35%, transparent 55%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 35%, transparent 55%);
   transform: translateX(-120%);
-  transition: transform 900ms cubic-bezier(0.2,0.8,0.2,1);
+  transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
   pointer-events: none;
 }
 
-.card-shine:hover::before { transform: translateX(120%); }
-.card-shine > * { position: relative; z-index: 1; }
+.card-shine:hover::before {
+  transform: translateX(120%);
+}
 
-.phone-float { animation: phone-float 5.5s ease-in-out infinite; }
+.card-shine > * {
+  position: relative;
+  z-index: 1;
+}
 
-.scan-line { position: relative; overflow: hidden; }
+.phone-float {
+  animation: phone-float 5.5s ease-in-out infinite;
+}
+
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
 
 .scan-line::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.36), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.36), transparent);
   transform: translateX(-110%);
   animation: scan 3.2s ease-in-out infinite;
 }
 
-.animate-soft-pulse { animation: soft-pulse 2.8s ease-in-out infinite; }
+.animate-soft-pulse {
+  animation: soft-pulse 2.8s ease-in-out infinite;
+}
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes phone-float {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-8px) rotate(1deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
 }
 
 @keyframes scan {
-  0%, 42% { transform: translateX(-110%); }
-  70%, 100% { transform: translateX(110%); }
+  0%,
+  42% {
+    transform: translateX(-110%);
+  }
+  70%,
+  100% {
+    transform: translateX(110%);
+  }
 }
 
 @keyframes soft-pulse {
-  0%, 100% { opacity: 0.72; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------------- Custom WebGL/canvas cursor ---------------- */
+
+.custom-cursor-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: contents;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-width: 1.5px;
+  border-style: solid;
+  will-change: transform, width, height;
+}
+
+/* When the custom cursor is mounted, hide the native cursor on non-form controls.
+   Keep default cursor inside form fields for accessibility. */
+html.has-custom-cursor,
+html.has-custom-cursor body {
+  cursor: none;
+}
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role="button"],
+html.has-custom-cursor [data-cursor] {
+  cursor: none;
+}
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select {
+  cursor: text;
+}
+
+/* Touch / coarse pointer: never hide the system cursor */
+@media (pointer: coarse) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+  .custom-cursor-canvas,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ---------------- Bento grid ---------------- */
+
+.bento-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .bento-cell {
+    grid-column: span 3 / span 3;
+  }
+  .bento-cell--lg {
+    grid-column: span 4 / span 4;
+  }
+  .bento-cell--sm {
+    grid-column: span 2 / span 2;
+  }
+  .bento-cell--full {
+    grid-column: span 6 / span 6;
+  }
+}
+
+/* ---------------- Tech marquee ---------------- */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* ---------------- Aurora drifting blobs ---------------- */
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.7;
+  will-change: transform, opacity;
+}
+
+.aurora-blob--1 {
+  top: -10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.55), rgba(16, 185, 129, 0) 70%);
+  animation: aurora-drift-1 22s ease-in-out infinite alternate;
+}
+
+.aurora-blob--2 {
+  bottom: -15%;
+  right: -10%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.4), rgba(34, 211, 238, 0) 70%);
+  animation: aurora-drift-2 26s ease-in-out infinite alternate;
+}
+
+.aurora-blob--3 {
+  top: 30%;
+  left: 35%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle at center, rgba(167, 243, 208, 0.18), rgba(167, 243, 208, 0) 70%);
+  animation: aurora-drift-3 30s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(8vw, 6vh, 0) scale(1.08);
+  }
+}
+
+@keyframes aurora-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-10vw, -8vh, 0) scale(1.06);
+  }
+}
+
+@keyframes aurora-drift-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(-6vw, 4vh, 0) scale(0.94);
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none !important;
+  }
+}
+
+/* ---------------- Holographic conic border ---------------- */
+
+.holo-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.holo-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--holo-angle, 0deg),
+    rgba(110, 231, 183, 0.0) 0deg,
+    rgba(110, 231, 183, 0.85) 60deg,
+    rgba(34, 211, 238, 0.85) 120deg,
+    rgba(167, 243, 208, 0.0) 180deg,
+    rgba(110, 231, 183, 0.0) 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.holo-border:hover::before {
+  opacity: 1;
+  animation: holo-spin 4s linear infinite;
+}
+
+@property --holo-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes holo-spin {
+  from { --holo-angle: 0deg; }
+  to   { --holo-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-border::before {
+    animation: none !important;
+  }
+}
+
+/* ---------------- Generic glow halo ---------------- */
+
+.glow-halo {
+  position: absolute;
+  inset: -25%;
+  border-radius: inherit;
+  background: radial-gradient(closest-side, rgba(110, 231, 183, 0.22), transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.7;
+}
+
+
+/* ---------------- Cinematic typography ---------------- */
+
+.cinematic-headline {
+  font-family: var(--font-geist-sans), var(--font-space-grotesk),
+    var(--font-archivo), sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.4vw + 0.6rem, 5.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.kinetic-text {
+  font-family: var(--font-geist-sans), var(--font-space-grotesk),
+    var(--font-archivo), sans-serif;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+/* ---------------- AI assistant voice-wave bars ---------------- */
+
+.ai-wave-bar {
+  height: 6px;
+  animation: ai-wave 1.05s ease-in-out infinite;
+}
+
+@keyframes ai-wave {
+  0%,
+  100% {
+    height: 6px;
+    transform: translateY(0);
+  }
+  50% {
+    height: 18px;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-wave-bar {
+    animation: none !important;
+    height: 12px !important;
+  }
+}
+
+/* ---------------- Cursor spotlight base ---------------- */
+
+.cursor-spotlight {
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+@media (pointer: coarse) {
+  .cursor-spotlight {
+    display: none !important;
+  }
+}
+
+/* ---------------- Terminal accent ---------------- */
+
+.terminal-card {
+  isolation: isolate;
+}
+.terminal-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px 200px at 20% 0%,
+    rgba(16, 185, 129, 0.18),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: -1;
 }
